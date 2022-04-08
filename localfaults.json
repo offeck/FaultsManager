@@ -1,0 +1,18 @@
+[
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "4704b15f-3c4e-4d82-957e-bf63f891a7db",
+        "starttime": 1649453925.0272272
+    },
+    {
+        "devicename": "בלון גאיה",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "49d6b754-de12-445e-b16a-bac756fe3e6b",
+        "starttime": 1649454218.3102262
+    }
+]
