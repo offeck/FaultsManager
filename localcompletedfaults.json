@@ -1,2 +1,20 @@
 [
+    {
+        "devicename": "בלון גאיה",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "49d6b754-de12-445e-b16a-bac756fe3e6b",
+        "techcomment": "",
+        "timetillfixed": 1897.4474248886108
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "1df659fa-ca89-4685-8bff-3d59d65f4fc2",
+        "techcomment": "",
+        "timetillfixed": 4.555686950683594
+    }
 ]

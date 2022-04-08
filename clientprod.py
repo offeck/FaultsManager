@@ -11,17 +11,17 @@ def get_keys_from_value(d, val):
 
 class myframe(tk.Frame):
     def __init__(self, parent, prevframe=None):
-        super().__init__(parent)
+        super().__init__(parent,bg='#180A0A')
         self.parent = parent
         self.prevframe = prevframe
         # self.nextframe = nextframe
 
     # def getnextframe(self):
     #     return self.nextframe
-    def backbutton(self):
+    def backbutton(self,**kw):
         if self.prevframe:
-            tk.Button(self, text='חזור', fg="black", bg="grey",
-                      command=self.goback).grid()
+            tk.Button(self, text='חזור', fg="#711A75", bg="#F10086",
+                      command=self.goback).grid(**kw)
 
     def getprevframe(self):
         return self.prevframe
@@ -38,11 +38,11 @@ class faultshower(myframe):
         # variable storing time
         self.openfault = openfault
         # label displaying time
-        self.deletebutton = tk.Button(self, text='X', command=self.ondeletebutton, fg='red', bg='grey')
+        self.deletebutton = tk.Button(self, text='X', command=self.ondeletebutton, fg='#F582A7', bg='#180A0A')
         self.deletebutton.grid(row=c, column=0)
-        self.summarybutton = tk.Button(self, text=self.openfault.getsummary(), command=self.onsummarybutton)
+        self.summarybutton = tk.Button(self, text=self.openfault.getsummary(), command=self.onsummarybutton,bg='#180A0A',fg='#F10086')
         self.summarybutton.grid(row=c, column=1)
-        self.uptimelabel = tk.Label(self, text=self.openfault.getuptime(), bg='grey')
+        self.uptimelabel = tk.Label(self, text=self.openfault.getuptime(), bg='#711A75',fg='#F582A7')
         self.uptimelabel.grid(row=c, column=2)
         # start the timer
         self.uptimelabel.after(100, self.refresh_label)
@@ -62,6 +62,7 @@ class faultshower(myframe):
         try:
             self.uptimelabel.configure(text=self.openfault.getuptime())
         except:
+            print('starttime error')
             self.grid_forget()
         # request tkinter to call self.refresh after 1s (the delay is given in ms)
         self.uptimelabel.after(1000, self.refresh_label)
@@ -71,20 +72,20 @@ class closefaultframe(myframe):
     def __init__(self, parent, openfault, prevframe=None):
         super().__init__(parent, prevframe)
         self.openfault = openfault
-        tk.Label(self, text=self.openfault.getexpandedsummary()).grid()
+        tk.Label(self, text=self.openfault.getexpandedsummary(),fg="#711A75", bg="#F582A7").grid(columnspan=2,pady=10)
         self.entries = []
         # self.translated = True
         for c,field in enumerate(openfault.getfields(['devicename','component','description','techcomment'],True).items()):
             print(field)
-            tk.Label(self,text=field[0]).grid(row=c+1,column=1)
+            tk.Label(self,text=field[0],bg='#711A75',fg='#F10086').grid(row=c+1,column=1)
             print(get_keys_from_value(engtoheb,field[0]))
-            self.entries.append((get_keys_from_value(engtoheb,field[0])[0],tk.Entry(self,justify='right')))
+            self.entries.append((get_keys_from_value(engtoheb,field[0])[0],tk.Entry(self,justify='right',bg='#F582A7')))
             self.entries[-1][1].insert(0,field[1])
             if field[1] == "אחר":
                 self.entries[-1][1].configure(fg='red')
-            self.entries[-1][1].grid(row=c+1,column=0)
-        tk.Button(self, text='סגור תקלה', bg='grey', fg='red', command=self.onbuttonclose).grid()
-        self.backbutton()
+            self.entries[-1][1].grid(row=c+1,column=0,pady=(0,7))
+        tk.Button(self, text='סגור תקלה',fg="#711A75", bg="#F582A7", command=self.onbuttonclose).grid(columnspan=2,pady=(0,7))
+        self.backbutton(columnspan=2)
 
     def onbuttonclose(self):
         self.openfault.closeandsubmit({i[0]:i[1].get() for i in self.entries})
@@ -149,14 +150,14 @@ class openfaultsobject(dict):
 class openingframe(myframe):
     def __init__(self, parent, prevframe=None):
         super().__init__(parent, prevframe)
-        tk.Button(self, text='פתח תקלה', fg="white", bg="green",
-                  command=self.onopenfault).grid(row=0, column=0)
+        tk.Button(self, text='פתח תקלה', fg="#711A75", bg="#F582A7",
+                  command=self.onopenfault).grid(row=0, column=0,pady=(0,10))
         self.openfaults = []
         with open(localjson, encoding='utf-8') as f:
             for i in json.load(f):
                 self.openfaults.append(openfaultsobject(i))
         for c, i in enumerate(self.openfaults):
-            faultshower(self, i, c + 1).grid()
+            faultshower(self, i, c + 1).grid(pady=(0,7))
     def cleanopenfaults(self):
         self.openfaults = []
     def onopenfault(self):
@@ -174,11 +175,11 @@ class openfaultframe(myframe):
         self.options = options
         self.stage = stage
         self.data = data
-        tk.Label(master=self,text=engtoheb[stage],fg='grey').grid()
+        tk.Label(master=self,text=engtoheb[stage],fg="#711A75", bg="#F582A7",font=("Arial", 10)).grid(pady=10)
         iterable = self.options if isinstance(self.options,list) else self.options.keys()
         for opt in iterable:
-            tk.Button(master=self, text=opt, fg="black",
-                         bg="white",command=partial(self.onbuttonpress,opt)).grid()
+            tk.Button(master=self, text=opt, fg="#F10086",
+                         bg="#711A75",command=partial(self.onbuttonpress,opt)).grid(pady=(0,7))
         self.backbutton()
 
     def onbuttonpress(self,opt):
@@ -215,7 +216,8 @@ if __name__ == '__main__':
                 "techcomment":"פיתרון תקלה"}
     root = tk.Tk()
     root.title('מערכת תיעוד תקלות')
-    root.geometry('300x400')
-    tk.Label(root, text=config['user']).pack()
-    openingframe(root).pack()
+    # root.geometry('300x400')
+    root.configure(bg='#180A0A')
+    tk.Label(root, text=config['user'],font=("Arial", 16),bg='#180A0A',fg='#711A75').pack(padx=55)
+    openingframe(root).pack(pady=(10,0))
     root.mainloop()
