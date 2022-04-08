@@ -218,24 +218,4 @@ if __name__ == '__main__':
     root.geometry('300x400')
     tk.Label(root, text=config['user']).pack()
     openingframe(root).pack()
-    # openframe = tkinter.Frame(root)
-    # openframe.pack()
-    # with open('config.json', encoding='utf-8') as f:
-    #     config = json.load(f)
-    # tk.Label(openframe, text=f'שלום {config["user"]}').grid(row=0, column=1)
-    # butt = tk.Button(openframe, text='פתח תקלה', foreground="black", background="white", command=opentakala_button)
-    # butt.grid(row=0, column=0)
-    # openedtakalot = []
-    # with open(localjson, encoding='utf-8') as f:
-    #     temp = json.load(f)
-    #     for i in temp:
-    #         openedtakalot.append(opentakala(**i))
-    # for c, i in enumerate(openedtakalot):
-    #     upTimer(openframe,i,c+1)
-
-    # tk.Label(text=f'שלום {user}').grid(row=0,column=0,sticky='ne')
-    # for r,i in enumerate(js.keys()):
-    #     tk.Label(text=i).grid(row=r,column=0)
-    #     for c,j in enumerate(js[i].keys()):
-    #         tk.Label(text=j).grid(row=r,column=c+1)
     root.mainloop()
