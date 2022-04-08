@@ -1,7 +1,7 @@
 {
   "user": "חמל חיובי צפוני",
-  "localjson": "localfaults.json",
-  "completedjson": "localcompletedfaults.json",
+  "localjson": "D:\\Projects\\Python\\FaultsManager\\localfaults.json",
+  "completedjson": "D:\\Projects\\Python\\FaultsManager\\localcompletedfaults.json",
   "localdevices": {
     "בלון אטלס": "בלון",
     "בלון זאוס": "בלון",

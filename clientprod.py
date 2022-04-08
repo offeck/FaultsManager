@@ -202,7 +202,7 @@ class openfaultframe(myframe):
 
 
 if __name__ == '__main__':
-    with open('config.json', encoding='utf-8') as f:
+    with open('D:\Projects\Python\FaultsManager\config.json', encoding='utf-8') as f:
         config = json.load(f)
     localjson = config['localjson']
     stages = ['devicename','component','description']
