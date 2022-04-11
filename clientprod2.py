@@ -23,7 +23,7 @@ class myframe(tk.Frame):
     def backbutton(self, **kw):
         if self.prevframe:
             tk.Button(self, text='חזור', fg="#FF8C32", bg="#DDDDDD",
-                      command=self.goback).grid(**kw)
+                      command=self.goback,**regfont).grid(**kw)
 
     def getprevframe(self):
         return self.prevframe
@@ -41,13 +41,13 @@ class faultshower(myframe):
         self.openfault = openfault
         # label displaying time
         self.deletebutton = tk.Button(
-            self, text='X', command=self.ondeletebutton, fg='#DDDDDD', bg='#06113C')
+            self, text='X', command=self.ondeletebutton,**regfont, fg='#DDDDDD', bg='#06113C')
         self.deletebutton.grid(row=c, column=0)
         self.summarybutton = tk.Button(self, text=self.openfault.getsummary(
-        ), command=self.onsummarybutton, bg='#06113C', fg='#FF8C32')
+        ), command=self.onsummarybutton, bg='#06113C',**regfont, fg='#FF8C32')
         self.summarybutton.grid(row=c, column=1)
         self.uptimelabel = tk.Label(
-            self, text=self.openfault.getuptime(), bg='#FF8C32', fg='#DDDDDD')
+            self, text=self.openfault.getuptime(),**regfont, bg='#FF8C32', fg='#DDDDDD')
         self.uptimelabel.grid(row=c, column=2)
         # start the timer
         self.uptimelabel.after(100, self.refresh_label)
@@ -81,21 +81,21 @@ class closefaultframe(myframe):
         super().__init__(parent=parent, openfaults=openfaults, prevframe=prevframe)
         self.openfault = openfault
         tk.Label(self, text=self.openfault.getexpandedsummary(),
-                 fg="#FF8C32", bg="#DDDDDD").grid(columnspan=2, pady=10)
+                 fg="#FF8C32", bg="#DDDDDD",**regfont).grid(columnspan=2, pady=10)
         self.entries = []
         # self.translated = True
         for c, field in enumerate(openfault.getfields(['devicename', 'component', 'description', 'techcomment'], True).items()):
             print(field)
             tk.Label(self, text=field[0], bg='#FF8C32',
-                     fg='#DDDDDD').grid(row=c+1, column=1)
-            print(get_keys_from_value(engtoheb, field[0]))
-            self.entries.append((get_keys_from_value(engtoheb, field[0])[
-                                0], tk.Entry(self, justify='right', bg='#DDDDDD')))
+                     fg='#DDDDDD',**regfont).grid(row=c+1, column=1)
+            print(get_keys_from_value(engtohebdict, field[0]))
+            self.entries.append((get_keys_from_value(engtohebdict, field[0])[
+                                0], tk.Entry(self, justify='right',**regfont, bg='#DDDDDD')))
             self.entries[-1][1].insert(0, field[1])
             if field[1] == "אחר":
                 self.entries[-1][1].configure(fg='red')
             self.entries[-1][1].grid(row=c+1, column=0, pady=(0, 7))
-        tk.Button(self, text='סגור תקלה', fg="#FF8C32", bg="#DDDDDD",
+        tk.Button(self, text='סגור תקלה', fg="#FF8C32", bg="#DDDDDD",**regfont,
                   command=self.onbuttonclose).grid(columnspan=2, pady=(0, 7))
         self.backbutton(columnspan=2)
 
@@ -106,7 +106,7 @@ class closefaultframe(myframe):
         openingframe(root, self.openfaults).pack()
 
 
-class openfaultsobject(dict):
+class openfaultobject(dict):
     data: dict
 
     def __init__(self, data):
@@ -128,9 +128,9 @@ class openfaultsobject(dict):
         return ' '.join([self['devicename'], self['component'], self['description']])
 
     def deletefromlocal(self):
-        with open(localjson, "r", encoding='utf-8') as file:
+        with open(localjsonpath, "r", encoding='utf-8') as file:
             data = json.load(file)
-        with open(localjson, "w", encoding='utf-8') as file:
+        with open(localjsonpath, "w", encoding='utf-8') as file:
             print(self['tid'])
             json.dump(list(filter(
                 lambda i: i["tid"] != self['tid'], data)), file, ensure_ascii=False, indent=4)
@@ -142,23 +142,27 @@ class openfaultsobject(dict):
         # self.pop('starttime', None) temporary change to check excel compatibility
         self['starttime'] = time.strftime(
             '%d/%m/%Y %H:%M:%S', time.localtime(time.time()))
-        with open(completedjson, "r", encoding='utf-8') as file:
+        with open(completedjsonpath, "r", encoding='utf-8') as file:
             filedata = json.load(file)
         # 2. Update json object
         filedata.append(self)
         # 3. Write json file
-        with open(completedjson, "w", encoding='utf-8') as file:
+        with open(completedjsonpath, "w", encoding='utf-8') as file:
             json.dump(filedata, file, ensure_ascii=False, indent=4)
         self.deletefromlocal()
 
-    def getfields(self, keys=None, translated=False):
+    def getfields(self, keys=None, translated=False, sorted=False):
         # print(set(keys).issubset(self.keys()), keys, list(self.keys()))
+        # data = OrderedDict()
         data = {i: self[i] for i in keys} if keys and set(
             keys).issubset(self.keys()) else self
+        print(data)
         if translated:
-            sharedkeys = set(data.keys()).intersection(engtoheb.keys())
+            # sharedkeys = set(data.keys()).intersection(engtohebdict.keys())
+            sharedkeys = [key for key in data.keys() if key in engtohebdict.keys()]
+            print(sharedkeys)
             for key in sharedkeys:
-                data.update({engtoheb[key]: self[key]})
+                data.update({engtohebdict[key]: self[key]})
                 data.pop(key, None)
             return data
         return data
@@ -167,7 +171,7 @@ class openfaultsobject(dict):
 class openingframe(myframe):
     def __init__(self, parent, openfaults):
         super().__init__(parent=parent, openfaults=openfaults)
-        tk.Button(self, text='פתח תקלה', fg="#FF8C32", bg="#DDDDDD",
+        tk.Button(self, text='פתח תקלה', fg="#FF8C32",**regfont, bg="#DDDDDD",
                   command=self.onopenfault).grid(row=0, column=0, pady=(0, 10))
         for c, i in enumerate(self.openfaults):
             faultshower(self, i, c + 1).grid(pady=(0, 7))
@@ -186,11 +190,10 @@ class openfaultframe(myframe):
         self.stage = stage
         self.data = data
         self.islast = isinstance(self.options, list)
-        tk.Label(master=self, text=engtoheb[stage], fg="#FF8C32", bg="#DDDDDD", font=(
-            "Arial", 10)).grid(pady=10)
+        tk.Label(master=self, text=engtohebdict[stage], fg="#FF8C32", bg="#DDDDDD", **regfont).grid(pady=10)
         iterable = self.options if self.islast else self.options.keys()
         for opt in iterable:
-            tk.Button(master=self, text=opt, fg="#DDDDDD",
+            tk.Button(master=self, text=opt,**regfont, fg="#DDDDDD",
                       bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7))
         self.backbutton()
 
@@ -205,17 +208,17 @@ class openfaultframe(myframe):
             if all((any((i[stage] != self.data[stage] for stage in stages)) for i in self.openfaults)):
                 self.data.update(
                     {"tid": str(uuid.uuid4()), "starttime": time.time()})
-                with open(localjson, "r", encoding='utf-8') as file:
+                with open(localjsonpath, "r", encoding='utf-8') as file:
                     data = json.load(file)
                 data.append(self.data)
-                with open(localjson, "w", encoding='utf-8') as file:
+                with open(localjsonpath, "w", encoding='utf-8') as file:
                     json.dump(data, file, ensure_ascii=False, indent=4)
-                self.openfaults.append(openfaultsobject(self.data))
+                self.openfaults.append(openfaultobject(self.data))
                 openingframe(self.master, self.openfaults).pack()
                 return
             self.data.pop(self.stage, None)
             self.pack()
-            tk.Label(master=self, text='תקלה פתוחה זאת קיימת',
+            tk.Label(master=self,**regfont, text='תקלה פתוחה זאת קיימת',
                      fg='red', bg=self['bg']).grid()
             return
         options = config["devices"][self.options[opt]
@@ -227,23 +230,19 @@ class openfaultframe(myframe):
 if __name__ == '__main__':
     with open('D:\Projects\Python\FaultsManager\config.json', encoding='utf-8') as f:
         config = json.load(f)
-    localjson = config['localjson']
+    localjsonpath = config['localjson']
     stages = ['devicename', 'component', 'description']
-    completedjson = config['completedjson']
-    engtoheb = {"description": "פירוט תקלה",
-                "component": "רכיב תקלה",
-                "devicename": "שם אמצעי",
-                "devicetype": "סוג אמצעי",
-                "timetillfixed": "זמן",
-                "starttime": "זמן התחלה",
-                "techcomment": "פיתרון תקלה"}
+    completedjsonpath = config['completedjson']
+    engtohebdict = config['engtohebdict']
     root = tk.Tk()
     root.title('תיעוד תקלות')
+    regfont = {'font':(
+        "Arial", 14)}
     # root.geometry('300x400')
     root.configure(bg='#06113C')
     tk.Label(root, text=config['user'], font=(
-        "Arial", 16), bg='#06113C', fg='#FF8C32').pack(padx=60)
-    with open(localjson, encoding='utf-8') as f:
-        openingframe(root, [openfaultsobject(i)
+        "Arial", 20), bg='#06113C', fg='#FF8C32').pack(padx=80)
+    with open(localjsonpath, encoding='utf-8') as f:
+        openingframe(root, [openfaultobject(i)
                      for i in json.load(f)]).pack(pady=(10, 0))
     root.mainloop()

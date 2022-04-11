@@ -8,6 +8,13 @@
     "בלון גאיה": "בלון",
     "קרנצ 170": "קרנצ"
   },
+  "engtohebdict":{"description": "פירוט תקלה",
+    "component": "רכיב תקלה",
+    "devicename": "שם אמצעי",
+    "devicetype": "סוג אמצעי",
+    "timetillfixed": "זמן",
+    "starttime": "זמן התחלה",
+    "techcomment": "פיתרון תקלה"},
   "devices": {
     "בלון": {
       "מצלמה תרמית": [
