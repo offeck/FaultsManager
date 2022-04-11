@@ -1,10 +1,18 @@
 [
     {
-        "devicename": "בלון זאוס",
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "3c6352f5-c09d-4e79-b038-aa95e8cd5ca5",
+        "starttime": 1649517552.9155378
+    },
+    {
+        "devicename": "בלון אטלס",
         "devicetype": "בלון",
         "component": "מצלמה תרמית",
         "description": "מסך שחור",
-        "tid": "4704b15f-3c4e-4d82-957e-bf63f891a7db",
-        "starttime": 1649453925.0272272
+        "tid": "1ae12e3d-159a-4346-b606-b000cbdbed66",
+        "starttime": 1649587977.2929618
     }
 ]

@@ -1,20 +1,222 @@
 [
     {
-        "devicename": "בלון גאיה",
+        "devicename": "בלון אטלס",
         "devicetype": "בלון",
-        "component": "מצלמה תרמית",
-        "description": "מסך שחור",
-        "tid": "49d6b754-de12-445e-b16a-bac756fe3e6b",
-        "techcomment": "",
-        "timetillfixed": 1897.4474248886108
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "a6421598-e87b-40ac-bdd5-bd0367e6b8de",
+        "starttime": "09/04/2022 19:13:44",
+        "techcomment": "אלוהים ישמור",
+        "timetillfixed": 10.068939208984375
     },
     {
         "devicename": "בלון זאוס",
         "devicetype": "בלון",
         "component": "מצלמת יום",
         "description": "לא רואים טוב",
-        "tid": "1df659fa-ca89-4685-8bff-3d59d65f4fc2",
+        "tid": "2c71b194-9742-4431-9dd6-17743d7c3b62",
+        "starttime": "09/04/2022 19:14:28",
+        "techcomment": "וואו",
+        "timetillfixed": 929.0982718467712
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "f3ba095c-0ca4-46dd-9b34-4ffafb1c1e54",
+        "starttime": "09/04/2022 19:15:16",
+        "techcomment": "טעות",
+        "timetillfixed": 6.824260234832764
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "אין פוקוס",
+        "tid": "47920e80-7ccc-40f9-9306-2523bd1cfe7a",
+        "starttime": "09/04/2022 19:16:26",
+        "techcomment": "היכן",
+        "timetillfixed": 10.827731132507324
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "אין פוקוס",
+        "tid": "406320e2-1f05-4cdc-a103-de30baef5ad8",
+        "starttime": "09/04/2022 19:22:13",
+        "techcomment": "למה",
+        "timetillfixed": 1539.3744604587555
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "a173af18-a4b4-4b2c-891b-c182990e6a94",
+        "starttime": "09/04/2022 19:27:52",
+        "techcomment": "תפסיק לשלוח",
+        "timetillfixed": 14.680986404418945
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "806a827b-80e2-4265-9283-94a931efface",
+        "starttime": "09/04/2022 19:30:40",
+        "techcomment": "תקלה",
+        "timetillfixed": 7.16899847984314
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "404f9ab9-8c26-4291-9e4c-9d28fe25c793",
+        "starttime": "09/04/2022 19:32:41",
+        "techcomment": "חרא",
+        "timetillfixed": 28.758235216140747
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "630fc26a-5f02-4c88-b4dc-0dfa7ea7a0ff",
+        "starttime": "09/04/2022 19:33:41",
+        "techcomment": "הפיתרון",
+        "timetillfixed": 15.444006204605103
+    },
+    {
+        "devicename": "בלון גאיה",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "אין פוקוס",
+        "tid": "ffe51a7f-8d78-4659-8ce6-23a136128e39",
+        "starttime": "09/04/2022 19:34:48",
+        "techcomment": "לא נפתר",
+        "timetillfixed": 11.77094841003418
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "acf50066-be55-46b2-a997-f88a01d1c35d",
+        "starttime": "09/04/2022 19:35:46",
+        "techcomment": "תקלה קשה",
+        "timetillfixed": 10.42100477218628
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "03135f18-b016-4538-b51a-426849c3e534",
+        "starttime": "09/04/2022 19:36:25",
+        "techcomment": "תקלה",
+        "timetillfixed": 9.15700387954712
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "0fcb9d29-26fa-49b8-9974-00c185778a32",
+        "starttime": "09/04/2022 19:38:18",
+        "techcomment": "דיי",
+        "timetillfixed": 10.734343528747559
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "cad0a46d-bef9-4159-a72e-925d2468df18",
+        "starttime": "09/04/2022 19:42:41",
+        "techcomment": "כך פתרתי אותה",
+        "timetillfixed": 13.567989587783813
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "a343101d-b052-41a0-95e1-1729dfd66964",
+        "starttime": "09/04/2022 19:44:56",
+        "techcomment": "דיי",
+        "timetillfixed": 9.869991302490234
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "0653d9f0-5519-495b-b821-bc39406aa98d",
+        "starttime": "09/04/2022 19:45:40",
+        "techcomment": "תצתצ",
+        "timetillfixed": 6.914996385574341
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "אין פוקוס",
+        "tid": "45c361e5-3852-4198-9914-d629d1ca935d",
+        "starttime": "09/04/2022 19:46:45",
+        "techcomment": "עלולו",
+        "timetillfixed": 7.266950845718384
+    },
+    {
+        "devicename": "בלון גאיה",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "64b43b5e-0ade-4076-a862-856ce0b66ea6",
+        "starttime": "10/04/2022 14:26:49",
         "techcomment": "",
-        "timetillfixed": 4.555686950683594
+        "timetillfixed": 43.70599722862244
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "1264e045-96c0-4759-9104-f2769a509d34",
+        "starttime": "10/04/2022 20:09:35",
+        "techcomment": "הסתדר לבד",
+        "timetillfixed": 10.338109970092773
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "35240e69-69de-45b4-bb23-a76d83817d18",
+        "starttime": "10/04/2022 20:17:48",
+        "techcomment": "ככה",
+        "timetillfixed": 21204.451535224915
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "אי התכיילות",
+        "tid": "53184ab4-ad02-44be-bfda-2061ed0603ef",
+        "starttime": "10/04/2022 20:19:01",
+        "techcomment": "",
+        "timetillfixed": 4.0157129764556885
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "אי התכיילות",
+        "tid": "0167162c-7912-49ce-bbf7-ad1df16367fa",
+        "starttime": "11/04/2022 14:01:42",
+        "techcomment": "ניוק למצלמה",
+        "timetillfixed": 24.35472583770752
     }
 ]
