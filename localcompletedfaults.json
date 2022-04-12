@@ -218,5 +218,45 @@
         "starttime": "11/04/2022 14:01:42",
         "techcomment": "ניוק למצלמה",
         "timetillfixed": 24.35472583770752
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "3da52227-4617-4722-9e75-00a2721d3083",
+        "starttime": "12/04/2022 14:00:23",
+        "techcomment": "ריסוט",
+        "timetillfixed": 32.14593982696533
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "bab0efa2-a324-45a9-a06d-3a9d0926a215",
+        "starttime": "12/04/2022 14:03:23",
+        "techcomment": "",
+        "timetillfixed": 7.8690102100372314
+    },
+    {
+        "devicename": "בלון זאוס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "37f178ad-d9a5-49f3-b603-20ce1b8301f2",
+        "starttime": "12/04/2022 15:19:22",
+        "techcomment": "נפתר לבד",
+        "timetillfixed": 29.028947830200195
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור",
+        "tid": "1ae12e3d-159a-4346-b606-b000cbdbed66",
+        "starttime": "12/04/2022 18:03:35",
+        "techcomment": "ריסטרט",
+        "timetillfixed": 187837.72343325615
     }
 ]

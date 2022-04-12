@@ -190,12 +190,13 @@ class openfaultframe(myframe):
         self.stage = stage
         self.data = data
         self.islast = isinstance(self.options, list)
-        tk.Label(master=self, text=engtohebdict[stage], fg="#FF8C32", bg="#DDDDDD", **regfont).grid(pady=10)
-        iterable = self.options if self.islast else self.options.keys()
-        for opt in iterable:
-            tk.Button(master=self, text=opt,**regfont, fg="#DDDDDD",
-                      bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7))
-        self.backbutton()
+        collength = 3
+        tk.Label(master=self, text=engtohebdict[stage], fg="#FF8C32", bg="#DDDDDD", **regfont).grid(pady=10,columnspan=collength)
+        iterable = self.options if self.islast else list(self.options.keys())
+        new_list = [iterable[i:i+collength] for i in range(0, len(iterable), collength)]
+        [[tk.Button(master=self, text=opt,**regfont, fg="#DDDDDD",
+                    bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7),**{'columnspan':collength} if len(tup)<2 else {'column':col},row=row+1)for col,opt in enumerate(sorted(tup,reverse=True))]for row,tup in enumerate(new_list)]
+        self.backbutton(columnspan=collength)
 
     def onbuttonpress(self, opt):
         self.pack_forget()
