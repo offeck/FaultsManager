@@ -200,7 +200,7 @@ class openfaultframe(myframe):
         for row, tup in enumerate(new_list):
             x = myframe(parent=self)
             [tk.Button(master=x, text=opt, **regfont, fg="#DDDDDD",
-                       bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, **{'columnspan': collength} if len(tup) < 2 else {'column': col}) for col, opt in enumerate(sorted(tup, reverse=True))]
+                       bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
             x.grid(row=row+1)
         self.backbutton(columnspan=collength)
 
