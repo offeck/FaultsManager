@@ -23,7 +23,7 @@ class myframe(tk.Frame):
     def backbutton(self, **kw):
         if self.prevframe:
             tk.Button(self, text='חזור', fg="#FF8C32", bg="#DDDDDD",
-                      command=self.goback,**regfont).grid(**kw)
+                      command=self.goback, **regfont).grid(**kw)
 
     def getprevframe(self):
         return self.prevframe
@@ -41,13 +41,13 @@ class faultshower(myframe):
         self.openfault = openfault
         # label displaying time
         self.deletebutton = tk.Button(
-            self, text='X', command=self.ondeletebutton,**regfont, fg='#DDDDDD', bg='#06113C')
+            self, text='X', command=self.ondeletebutton, **regfont, fg='#DDDDDD', bg='#06113C')
         self.deletebutton.grid(row=c, column=0)
         self.summarybutton = tk.Button(self, text=self.openfault.getsummary(
-        ), command=self.onsummarybutton, bg='#06113C',**regfont, fg='#FF8C32')
+        ), command=self.onsummarybutton, bg='#06113C', **regfont, fg='#FF8C32')
         self.summarybutton.grid(row=c, column=1)
         self.uptimelabel = tk.Label(
-            self, text=self.openfault.getuptime(),**regfont, bg='#FF8C32', fg='#DDDDDD')
+            self, text=self.openfault.getuptime(), **regfont, bg='#FF8C32', fg='#DDDDDD')
         self.uptimelabel.grid(row=c, column=2)
         # start the timer
         self.uptimelabel.after(100, self.refresh_label)
@@ -81,21 +81,21 @@ class closefaultframe(myframe):
         super().__init__(parent=parent, openfaults=openfaults, prevframe=prevframe)
         self.openfault = openfault
         tk.Label(self, text=self.openfault.getexpandedsummary(),
-                 fg="#FF8C32", bg="#DDDDDD",**regfont).grid(columnspan=2, pady=10)
+                 fg="#FF8C32", bg="#DDDDDD", **regfont).grid(columnspan=2, pady=10)
         self.entries = []
         # self.translated = True
         for c, field in enumerate(openfault.getfields(['devicename', 'component', 'description', 'techcomment'], True).items()):
             print(field)
             tk.Label(self, text=field[0], bg='#FF8C32',
-                     fg='#DDDDDD',**regfont).grid(row=c+1, column=1)
+                     fg='#DDDDDD', **regfont).grid(row=c+1, column=1)
             print(get_keys_from_value(engtohebdict, field[0]))
             self.entries.append((get_keys_from_value(engtohebdict, field[0])[
-                                0], tk.Entry(self, justify='right',**regfont, bg='#DDDDDD')))
+                                0], tk.Entry(self, justify='right', **regfont, bg='#DDDDDD')))
             self.entries[-1][1].insert(0, field[1])
             if field[1] == "אחר":
                 self.entries[-1][1].configure(fg='red')
             self.entries[-1][1].grid(row=c+1, column=0, pady=(0, 7))
-        tk.Button(self, text='סגור תקלה', fg="#FF8C32", bg="#DDDDDD",**regfont,
+        tk.Button(self, text='סגור תקלה', fg="#FF8C32", bg="#DDDDDD", **regfont,
                   command=self.onbuttonclose).grid(columnspan=2, pady=(0, 7))
         self.backbutton(columnspan=2)
 
@@ -159,7 +159,8 @@ class openfaultobject(dict):
         print(data)
         if translated:
             # sharedkeys = set(data.keys()).intersection(engtohebdict.keys())
-            sharedkeys = [key for key in data.keys() if key in engtohebdict.keys()]
+            sharedkeys = [
+                key for key in data.keys() if key in engtohebdict.keys()]
             print(sharedkeys)
             for key in sharedkeys:
                 data.update({engtohebdict[key]: self[key]})
@@ -171,7 +172,7 @@ class openfaultobject(dict):
 class openingframe(myframe):
     def __init__(self, parent, openfaults):
         super().__init__(parent=parent, openfaults=openfaults)
-        tk.Button(self, text='פתח תקלה', fg="#FF8C32",**regfont, bg="#DDDDDD",
+        tk.Button(self, text='פתח תקלה', fg="#FF8C32", **regfont, bg="#DDDDDD",
                   command=self.onopenfault).grid(row=0, column=0, pady=(0, 10))
         for c, i in enumerate(self.openfaults):
             faultshower(self, i, c + 1).grid(pady=(0, 7))
@@ -191,11 +192,16 @@ class openfaultframe(myframe):
         self.data = data
         self.islast = isinstance(self.options, list)
         collength = 3
-        tk.Label(master=self, text=engtohebdict[stage], fg="#FF8C32", bg="#DDDDDD", **regfont).grid(pady=10,columnspan=collength)
+        tk.Label(master=self, text=engtohebdict[stage], fg="#FF8C32",
+                 bg="#DDDDDD", **regfont).grid(pady=10, columnspan=collength)
         iterable = self.options if self.islast else list(self.options.keys())
-        new_list = [iterable[i:i+collength] for i in range(0, len(iterable), collength)]
-        [[tk.Button(master=self, text=opt,**regfont, fg="#DDDDDD",
-                    bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7),**{'columnspan':collength} if len(tup)<2 else {'column':col},row=row+1)for col,opt in enumerate(sorted(tup,reverse=True))]for row,tup in enumerate(new_list)]
+        new_list = [iterable[i:i+collength]
+                    for i in range(0, len(iterable), collength)]
+        for row, tup in enumerate(new_list):
+            x = myframe(parent=self)
+            [tk.Button(master=x, text=opt, **regfont, fg="#DDDDDD",
+                       bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, **{'columnspan': collength} if len(tup) < 2 else {'column': col}) for col, opt in enumerate(sorted(tup, reverse=True))]
+            x.grid(row=row+1)
         self.backbutton(columnspan=collength)
 
     def onbuttonpress(self, opt):
@@ -219,7 +225,7 @@ class openfaultframe(myframe):
                 return
             self.data.pop(self.stage, None)
             self.pack()
-            tk.Label(master=self,**regfont, text='תקלה פתוחה זאת קיימת',
+            tk.Label(master=self, **regfont, text='תקלה פתוחה זאת קיימת',
                      fg='red', bg=self['bg']).grid()
             return
         options = config["devices"][self.options[opt]
@@ -237,12 +243,12 @@ if __name__ == '__main__':
     engtohebdict = config['engtohebdict']
     root = tk.Tk()
     root.title('תיעוד תקלות')
-    regfont = {'font':(
-        "Arial", 14)}
+    regfont = {'font': (
+        "Arial", 16)}
     # root.geometry('300x400')
     root.configure(bg='#06113C')
     tk.Label(root, text=config['user'], font=(
-        "Arial", 20), bg='#06113C', fg='#FF8C32').pack(padx=80)
+        "Arial", 20), bg='#06113C', fg='#FF8C32').pack(padx=90)
     with open(localjsonpath, encoding='utf-8') as f:
         openingframe(root, [openfaultobject(i)
                      for i in json.load(f)]).pack(pady=(10, 0))
