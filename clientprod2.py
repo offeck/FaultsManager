@@ -151,7 +151,7 @@ class openfaultobject(dict):
             json.dump(filedata, file, ensure_ascii=False, indent=4)
         self.deletefromlocal()
 
-    def getfields(self, keys=None, translated=False, sorted=False):
+    def getfields(self, keys=None, translated=False):
         # print(set(keys).issubset(self.keys()), keys, list(self.keys()))
         # data = OrderedDict()
         data = {i: self[i] for i in keys} if keys and set(
@@ -197,11 +197,11 @@ class openfaultframe(myframe):
         iterable = self.options if self.islast else list(self.options.keys())
         new_list = [iterable[i:i+collength]
                     for i in range(0, len(iterable), collength)]
-        for row, tup in enumerate(new_list):
+        for row, tup in enumerate(new_list,1):
             x = myframe(parent=self)
             [tk.Button(master=x, text=opt, **regfont, fg="#DDDDDD",
                        bg="#FF8C32", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
-            x.grid(row=row+1)
+            x.grid(row=row)
         self.backbutton(columnspan=collength)
 
     def onbuttonpress(self, opt):
