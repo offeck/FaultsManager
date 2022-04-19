@@ -14,5 +14,13 @@
         "description": "מסך שחור",
         "tid": "90a94787-44ae-471a-95f1-1fe74b0731c0",
         "starttime": 1649776648.0894074
+    },
+    {
+        "devicename": "בלון גאיה",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "פיקסלים על חצי מסך",
+        "tid": "f3499506-5b56-4ba8-9e62-8aa93ca9003c",
+        "starttime": 1649942243.5261748
     }
 ]

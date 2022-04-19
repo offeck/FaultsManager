@@ -258,5 +258,25 @@
         "starttime": "12/04/2022 18:03:35",
         "techcomment": "ריסטרט",
         "timetillfixed": 187837.72343325615
+    },
+    {
+        "devicename": "קרנצ 190",
+        "devicetype": "קרנצ",
+        "component": "מצלמת סוויר",
+        "description": "לא רואים טוב",
+        "tid": "cebc0ef3-eaae-45f1-bf72-99a2424d9dd0",
+        "starttime": "14/04/2022 13:53:46",
+        "techcomment": "קקי בפיתה",
+        "timetillfixed": 11.435767650604248
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "תקשורת",
+        "description": "ריצודים במצלמה תרמית",
+        "tid": "6151aea7-406b-4ca9-8d3e-a392838996e2",
+        "starttime": "19/04/2022 03:10:33",
+        "techcomment": "נוצ הורידו את העורק הבעייתי",
+        "timetillfixed": 36.345027446746826
     }
 ]
