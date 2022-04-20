@@ -1,3 +1,4 @@
+from ast import arg
 import tkinter as tk
 import json
 import time
@@ -10,18 +11,6 @@ def get_keys_from_value(d, val):
     return [k for k, v in d.items() if v == val]
 
 
-def changeOnHover(button, colorOnHover):
-
-    # adjusting backgroung of the widget
-    # background on entering widget
-    colorOnLeave = button['bg']
-
-    button.bind("<Enter>", func=lambda e: button.config(
-        bg=colorOnHover))
-
-    # background color on leving widget
-    button.bind("<Leave>", func=lambda e: button.config(
-        bg=colorOnLeave))
 
 
 class myframe(tk.Frame):
@@ -36,9 +25,8 @@ class myframe(tk.Frame):
     #     return self.nextframe
     def backbutton(self, **kw):
         if self.prevframe:
-            self.bt = tk.Button(self, text='חזור', fg="#00ADB5", bg="#DDDDDD",
-                                command=self.goback, **regfont)
-            changeOnHover(self.bt, '#AAAAAA')
+            self.bt = mybutton('#AAAAAA', self, text='חזור', fg="#00ADB5", bg="#DDDDDD",
+                               command=self.goback, **regfont)
             self.bt.grid(**kw)
 
     def getprevframe(self):
@@ -50,19 +38,31 @@ class myframe(tk.Frame):
             self.prevframe.pack()
 
 
+class mybutton(tk.Button):
+    def __init__(self, coloronhover, *args, **kw):
+        super().__init__(*args, **kw)
+        self.coloronleave = self['bg']
+        self.coloronhover = coloronhover
+
+        self.bind("<Enter>", func=lambda e: self.config(
+            bg=self.coloronhover))
+
+        # background color on leving widget
+        self.bind("<Leave>", func=lambda e: self.config(
+            bg=self.coloronleave))
+
+
 class faultshower(myframe):
     def __init__(self, parent, openfault, c):
         super().__init__(parent=parent)
         # variable storing time
         self.openfault = openfault
         # label displaying time
-        self.deletebutton = tk.Button(
-            self, text='X', command=self.ondeletebutton, **regfont, fg='#ab0317', bg='#222831')
-        changeOnHover(self.deletebutton, '#15191f')
+        self.deletebutton = mybutton('#15191f',
+                                     self, text='X', command=self.ondeletebutton, **regfont, fg='#ab0317', bg='#222831')
         self.deletebutton.grid(row=c, column=0)
-        self.summarybutton = tk.Button(self, text=self.openfault.getsummary(
+        self.summarybutton = mybutton('#15191f', self, text=self.openfault.getsummary(
         ), command=self.onsummarybutton, bg='#222831', **regfont, fg='#EEEEEE')
-        changeOnHover(self.summarybutton, '#15191f')
         self.summarybutton.grid(row=c, column=1)
         self.uptimelabel = tk.Label(
             self, text=self.openfault.getuptime(), **regfont, bg='#008187', fg='#EEEEEE')
@@ -113,9 +113,8 @@ class closefaultframe(myframe):
             if field[1] == "אחר":
                 self.entries[-1][1].configure(fg='red')
             self.entries[-1][1].grid(row=c+1, column=0, pady=(0, 7))
-        self.closebutton = tk.Button(self, text='סגור תקלה', fg="#00ADB5", bg="#393E46", **regfont,
-                                     command=self.onbuttonclose)
-        changeOnHover(self.closebutton, '#222831')
+        self.closebutton = mybutton('#222831', self, text='סגור תקלה', fg="#00ADB5", bg="#393E46", **regfont,
+                                    command=self.onbuttonclose)
         self.closebutton.grid(columnspan=2, pady=(0, 7))
         self.backbutton(columnspan=2)
 
@@ -192,9 +191,8 @@ class openfaultobject(dict):
 class openingframe(myframe):
     def __init__(self, parent, openfaults):
         super().__init__(parent=parent, openfaults=openfaults)
-        self.openfaultbutton = tk.Button(self, text='פתח תקלה', fg="#EEEEEE", **regfont, bg="#00ADB5",
-                                         command=self.onopenfault)
-        changeOnHover(self.openfaultbutton, '#008187')
+        self.openfaultbutton = mybutton('#008187', self, text='פתח תקלה', fg="#EEEEEE", **regfont, bg="#00ADB5",
+                                        command=self.onopenfault)
         self.openfaultbutton.grid(row=0, column=0, pady=(0, 10))
         for c, i in enumerate(self.openfaults):
             faultshower(self, i, c + 1).grid(pady=(0, 7))
@@ -205,14 +203,14 @@ class openingframe(myframe):
                        self.parent, self.openfaults, self).pack()
 
 
-class openfaultframe(myframe):
+class openfaultframe(myframe):  # stages need changes
     def __init__(self, stage, options, parent, openfaults, prevframe, data={}):
         super().__init__(parent=parent, openfaults=openfaults, prevframe=prevframe)
         # print(f'options : {options}')
         self.options = options
         self.stage = stage
         self.data = data
-        self.islast = isinstance(self.options, list)
+        self.islast = self.stage==stages[-1]
         collength = 3
         tk.Label(master=self, text=engtohebdict[stage], fg="#DDDDDD",
                  bg="#00ADB5", **regfont).grid(pady=10, columnspan=collength)
@@ -221,13 +219,8 @@ class openfaultframe(myframe):
                     for i in range(0, len(iterable), collength)]
         for row, tup in enumerate(new_list, 1):
             x = myframe(parent=self)
-            for col, opt in enumerate(sorted(tup, reverse=True)):
-                t = tk.Button(master=x, text=opt, **regfont, fg="#00ADB5",
-                              bg="#393E46", command=partial(self.onbuttonpress, opt))
-                changeOnHover(t, '#222831')
-                t.grid(pady=(0, 7), row=0, column=col)
-            # [tk.Button(master=x, text=opt, **regfont, fg="#00ADB5",
-            #            bg="#393E46", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
+            [mybutton('#222831', x, text=opt, **regfont, fg="#00ADB5",
+                      bg="#393E46", command=partial(self.onbuttonpress, opt)).grid(pady=(0, 7), row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
             x.grid(row=row)
         self.backbutton(columnspan=collength)
 
@@ -271,11 +264,11 @@ if __name__ == '__main__':
     root = tk.Tk()
     root.title('תיעוד תקלות')
     regfont = {'font': (
-        "Arial", 18)}
+        "calibri", 18)}
     # root.geometry('300x400')
     root.configure(bg='#222831')
     tk.Label(root, text=config['user'], font=(
-        "Arial", 20), bg='#222831', fg='#00ADB5').pack(padx=100)
+        "calibri", 20), bg='#222831', fg='#00ADB5').pack(padx=100)
     with open(localjsonpath, encoding='utf-8') as f:
         openingframe(root, [openfaultobject(i)
                      for i in json.load(f)]).pack(pady=(15, 0))

@@ -22,5 +22,13 @@
         "description": "פיקסלים על חצי מסך",
         "tid": "f3499506-5b56-4ba8-9e62-8aa93ca9003c",
         "starttime": 1649942243.5261748
+    },
+    {
+        "devicename": "בלון אטלס",
+        "devicetype": "בלון",
+        "component": "מצלמה תרמית",
+        "description": "אחר",
+        "tid": "423ec529-d87e-4e92-bb25-5677a3a44459",
+        "starttime": 1650485090.458225
     }
 ]
