@@ -11,8 +11,6 @@ def get_keys_from_value(d, val):
     return [k for k, v in d.items() if v == val]
 
 
-
-
 class myframe(tk.Frame):
     def __init__(self, *, parent: tk.Frame, openfaults: list = None, prevframe: tk.Frame = None):
         super().__init__(parent, bg='#222831')
@@ -210,7 +208,7 @@ class openfaultframe(myframe):  # stages need changes
         self.options = options
         self.stage = stage
         self.data = data
-        self.islast = self.stage==stages[-1]
+        self.islast = self.stage == stages[-1]
         collength = 3
         tk.Label(master=self, text=engtohebdict[stage], fg="#DDDDDD",
                  bg="#00ADB5", **regfont).grid(pady=10, columnspan=collength)
