@@ -3,11 +3,16 @@
   "localjson": "D:\\Projects\\Python\\FaultsManager\\localfaults.json",
   "completedjson": "D:\\Projects\\Python\\FaultsManager\\localcompletedfaults.json",
   "localdevices": {
-    "בלון אטלס": "בלון",
-    "בלון זאוס": "בלון",
-    "בלון גאיה": "בלון",
-    "קרנצ 170": "קרנצ",
-    "קרנצ 190": "קרנצ"
+    "בלון אטלס": {"devicetype":"בלון",
+    "devicelocation":"מוצב ארז"},
+    "בלון זאוס": {"devicetype":"בלון",
+      "devicelocation":"מוצב זאוס"},
+    "בלון גאיה": {"devicetype":"בלון",
+      "devicelocation":"מוצב פגה"},
+    "קרנצ 170": {"devicetype":"קרנצ",
+      "devicelocation":"ק.ד 170"},
+    "קרנצ 190": {"devicetype":"קרנצ",
+      "devicelocation":"ק.ד 190"}
   },
   "engtohebdict": {
     "description": "פירוט תקלה",
