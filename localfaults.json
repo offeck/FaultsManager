@@ -38,13 +38,5 @@
         "description": "אין פוקוס",
         "tid": "090af885-66eb-402c-9314-85cfc35a711b",
         "starttime": 1650752874.2859263
-    },
-    {
-        "devicetype": "קרנצ",
-        "devicename": "קרנצ 190",
-        "component": "מצלמה תרמית",
-        "description": "מסך שחור",
-        "tid": "80fe93ee-a497-4790-afd3-38df0eea7022",
-        "starttime": 1650753551.720928
     }
 ]

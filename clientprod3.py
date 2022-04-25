@@ -49,10 +49,11 @@ class mybutton(tk.Button):
             bg=self.coloronleave))
 
 
-class faultshower(myframe):
+class faultshower():
     def __init__(self, parent, openfault, c):
-        super().__init__(parent=parent)
+        # super().__init__(parent=parent)
         # variable storing time
+        self.parent = parent
         self.openfault = openfault
         # label displaying time
         self.deletebutton = mybutton('#15191f',
@@ -72,7 +73,12 @@ class faultshower(myframe):
     def ondeletebutton(self):
         # temporary changes!
         # self.grid_forget()
-        self.destroy()
+        # self.destroy()
+        
+        self.deletebutton.destroy()
+        self.summarybutton.destroy()
+        self.uptimelabel.destroy()
+        
         self.openfault.deletefromlocal()
         self.parent.openfaults.remove(self.openfault)
 
@@ -194,7 +200,7 @@ class openingframe(myframe):
                                         command=self.onopenfault)
         self.openfaultbutton.grid(columnspan=3, pady=(0, 15))
         for c, i in enumerate(self.openfaults):
-            faultshower(self, i, c + 1).grid(pady=20)
+            faultshower(self, i, c + 1)
 
     def onopenfault(self):
         self.pack_forget()
