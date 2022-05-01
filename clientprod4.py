@@ -49,10 +49,11 @@ class mybutton(tk.Button):
             bg=self.coloronleave))
 
 
-class faultshower(myframe):
+class faultshower():
     def __init__(self, parent, openfault, c):
-        super().__init__(parent=parent)
+        # super().__init__(parent=parent)
         # variable storing time
+        self.parent = parent
         self.openfault = openfault
         # label displaying time
         self.deletebutton = mybutton('#15191f',
@@ -72,7 +73,12 @@ class faultshower(myframe):
     def ondeletebutton(self):
         # temporary changes!
         # self.grid_forget()
-        self.destroy()
+        # self.destroy()
+
+        self.deletebutton.destroy()
+        self.summarybutton.destroy()
+        self.uptimelabel.destroy()
+
         self.openfault.deletefromlocal()
         self.parent.openfaults.remove(self.openfault)
 
@@ -101,11 +107,13 @@ class closefaultframe(myframe):
                  fg="#DDDDDD", bg="#00ADB5", **regfont).grid(columnspan=2, pady=10)
         self.entries = []
         # self.translated = True
+        # print(openfault.getfields(closestages, True))
         for c, field in enumerate(openfault.getfields(closestages, True).items()):
-            print(field)
             tk.Label(self, text=field[0], bg='#393E46',
                      fg='#00ADB5', **regfont).grid(row=c+1, column=1, sticky='ew')
-            print(get_keys_from_value(engtohebdict, field[0]))
+            print('field ', field)
+            print('getkeysfromvalue : ', get_keys_from_value(
+                engtohebdict, field[0]))
             self.entries.append((get_keys_from_value(engtohebdict, field[0])[
                                 0], tk.Entry(self, justify='right', **regfont, bg='#DDDDDD')))
             self.entries[-1][1].insert(0, field[1])
@@ -172,17 +180,19 @@ class openfaultobject(dict):
     def getfields(self, keys=None, translated=False):
         # print(set(keys).issubset(self.keys()), keys, list(self.keys()))
         # data = OrderedDict()
-        data = {i: self[i] for i in keys} if keys and set(
-            keys).issubset(self.keys()) else self
-        print(data)
+        print(set(
+            keys), self.keys(), set(keys).issubset(self.keys()))
+        data = {i: self[i] for i in keys if i in self} if keys else self
+        print(f'data before translation {data}')
         if translated:
             # sharedkeys = set(data.keys()).intersection(engtohebdict.keys())
             sharedkeys = [
                 key for key in data.keys() if key in engtohebdict.keys()]
-            print(sharedkeys)
+            print(f'shared keys {sharedkeys}')
             for key in sharedkeys:
                 data.update({engtohebdict[key]: self[key]})
                 data.pop(key, None)
+            print(f'translated data returned {data}')
             return data
         return data
 
@@ -194,45 +204,91 @@ class openingframe(myframe):
                                         command=self.onopenfault)
         self.openfaultbutton.grid(columnspan=3, pady=(0, 15))
         for c, i in enumerate(self.openfaults):
-            faultshower(self, i, c + 1).grid(pady=20)
+            faultshower(self, i, c + 1)
 
     def onopenfault(self):
         self.pack_forget()
-        openfaultframe(openstages[0], config['localdevices'],
-                       self.parent, self.openfaults, self).pack()
+        print(openstages[0])
+        openfaultframe(parent=self.parent, openfaults=self.openfaults, prevframe=self,
+                       stage=openstages[0], options=config['localdevices']).pack()
 
 
 class openfaultframe(myframe):  # stages need changes
-    def __init__(self, stage, options, parent, openfaults, prevframe, data={}):
+    def __init__(self, *, parent, openfaults, prevframe, stage, options, data: dict = {}, counter: int = 0):
         super().__init__(parent=parent, openfaults=openfaults, prevframe=prevframe)
         # print(f'options : {options}')
         self.options = options
         self.stage = stage
-        self.data = data
+        # self.conditions = conditions
+        self.data = data.copy()
+        self.counter = counter
         self.islast = self.stage == openstages[-1]
+        self.currentframe = self
         collength = 5
-        tk.Label(master=self, text=engtohebdict[stage], fg="#DDDDDD",
-                 bg="#00ADB5", **regfont).grid(pady=10)
-        iterable = self.options if isinstance(
-            options, list) else list(self.options.keys())
+        iterable = self.getselection()
+        print(f'iter {iterable}, {self.data}, {data}')
+        if len(iterable) == 1:  # ERROR FIX THIS, CREATING BLANK FRAMES INSTEAD OF SKIPPING FRAME WITH ONLY 1 SELECTION!!
+            self.currentframe = self.prevframe
+            # self.pack_forget()
+            # self.destroy()
+            self.onbuttonpress(iterable[0])
+            return
+
+        # # DISPLAY CURRENT STAGE, SHOW WHAT WAS FILLED EARLIER.
+
+        # frame1 = myframe(parent=self)
+        # frame2 = myframe(parent=self)
+        # tk.Label(master=self, text=engtohebdict[stage], fg="#DDDDDD",
+        #          bg="#00ADB5", **regfont).grid(columnspan=2, pady=10)
+        # frame1.grid(column=0)
+        # frame2.grid(column=1)
+        # for row, st in enumerate(openstages):
+        #     # print(get_keys_from_value(engtohebdict,st))
+        #     tk.Label(master=frame2, text=engtohebdict[st], bg=frame2['bg'], **
+        #              regfont, fg='red' if self.stage == st else 'black').grid(row=row)
+
+        # # CLEAN CODE TOMMOROW. MAYBE REPLACE TK.LABEL
+        x = myframe(parent=self)
+        for col, st in enumerate(openstages[::-1]):
+            tk.Label(master=x, text=engtohebdict[st], fg="#DDDDDD" if self.stage == st else 'black',
+                     bg="#00ADB5", **regfont).grid(padx=5, pady=(0, 10), column=col, row=0)
+            if st in self.data:
+                tk.Label(master=x, text=self.data[st], bg='#393E46',
+                         fg='#00ADB5', **regfont).grid(padx=5, pady=(0, 10), column=col, row=1)
+            else:
+                tk.Label(master=x, text='', fg="#DDDDDD" if self.stage == st else 'black',
+                         bg="#222831", **regfont).grid(padx=5, pady=(0, 10), column=col, row=1)
+        x.grid()
+
         new_list = [iterable[i:i+collength]
                     for i in range(0, len(iterable), collength)]
         for row, tup in enumerate(new_list, 1):
             x = myframe(parent=self)
             [mybutton('#222831', x, text=opt, **regfont, fg="#00ADB5",
-                      bg="#393E46", command=partial(self.onbuttonpress, opt)).grid(pady=5, padx=5, row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
-            x.grid(row=row)
-        self.backbutton(columnspan=collength)
+                      bg="#393E46", command=partial(self.onbuttonpress, opt)).grid(padx=5, row=0, column=col) for col, opt in enumerate(sorted(tup, reverse=True))]
+            x.grid(row=row, pady=(0, 10))
+        self.backbutton()
+
+    def getselection(self) -> list:
+        print(self.counter, self.stage)
+        return list({key if self.stage == 'devicename' else val[self.stage] for key, val in self.options.items() if all(
+            [val[dkey] == dval for dkey, dval in self.data.items()])}) if self.counter == 0 else self.options if isinstance(self.options, list) else list(self.options.keys())
+
+    # def submit
 
     def onbuttonpress(self, opt):
         self.pack_forget()
-        self.data.update({
-                         self.stage: opt})
-        # print(self.data,)
+        # if self.stage=='devicename':
+        #     self.data.update({
+        #                  self.options[opt]})
+        if self.stage != 'devicename':
+            self.data.update({self.stage: opt})
+        # print(self.data, self.conditions)
         if self.islast:
-            print(f'self.data : {self.data}')
+            # print(f'self.data : {self.conditions}')
             # print(all((any((i[stage]!=self.data[stage] for stage in stages)) for i in self.openfaults)),self.openfaults)
-            if all((any((i[stage] != self.data[stage] for stage in openstages)) for i in self.openfaults)):
+            # FIX COMPARE TO PASS ON MISSING KEYS!
+            if all((any((i[stage] != self.data[stage] for stage in openstages if stage in i)) for i in self.openfaults)):
                 self.data.update(
                     {"tid": str(uuid.uuid4()), "starttime": time.time()})
                 with open(localjsonpath, "r", encoding='utf-8') as file:
@@ -248,17 +304,25 @@ class openfaultframe(myframe):  # stages need changes
             tk.Label(master=self, **regfont, text='תקלה פתוחה זאת קיימת',
                      fg='red', bg=self['bg']).grid()
             return
-        options = config["devices"][self.data['devicetype']
-                                    ] if self.stage == 'devicename' else self.options[opt]  # if statement needs improvement
-        openfaultframe(openstages[openstages.index(self.stage)+1],
-                       options, self.master, self.openfaults, self).pack()
+        # options = config["devices"][self.conditions['devicetype']
+        #                             ] if self.stage == 'devicename' else self.options  # if statement needs improvement
+        options = self.options if self.counter == 0 else self.options[opt]
+        if self.stage == 'devicename':
+            self.data.update(options[opt])
+            self.data.update({'devicename': opt})
+            openfaultframe(parent=self.parent, openfaults=self.openfaults, prevframe=self.currentframe, stage=openstages[openstages.index(
+                self.stage)+1], options=config["devices"][self.data['devicetype']], data=self.data, counter=self.counter+1).pack()
+            return
+        openfaultframe(parent=self.parent, openfaults=self.openfaults, prevframe=self.currentframe, stage=openstages[openstages.index(
+            self.stage)+1], options=options, data=self.data, counter=self.counter).pack()
 
 
 if __name__ == '__main__':
-    with open('D:\Projects\Python\FaultsManager\config1.json', encoding='utf-8') as f:
+    with open('D:\Projects\Python\FaultsManager\config.json', encoding='utf-8') as f:
         config = json.load(f)
     localjsonpath = config['localjson']
-    openstages = ['devicetype', 'devicename', 'component', 'description']
+    openstages = ['devicetype','devicelocation',
+                  'devicename', 'component', 'description']
     closestages = openstages[1:]+['techcomment']
     completedjsonpath = config['completedjson']
     engtohebdict = config['engtohebdict']
@@ -272,8 +336,8 @@ if __name__ == '__main__':
     # root.geometry('300x400')
     root.configure(bg='#222831')
     tk.Label(root, text=config['user'], font=(
-        "calibri", 24, 'bold'), bg='#222831', fg='#00ADB5').pack(padx=200)
+        "calibri", 24, 'bold'), bg='#222831', fg='#00ADB5').pack(padx=200, pady=15)
     with open(localjsonpath, encoding='utf-8') as f:
         openingframe(root, [openfaultobject(i)
-                     for i in json.load(f)]).pack(pady=(20, 0))
+                     for i in json.load(f)]).pack()
     root.mainloop()

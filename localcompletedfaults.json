@@ -278,5 +278,17 @@
         "starttime": "19/04/2022 03:10:33",
         "techcomment": "נוצ הורידו את העורק הבעייתי",
         "timetillfixed": 36.345027446746826
+    },
+    {
+        "devicetype": "בלון",
+        "devicelocation": "מוצב פגה",
+        "devicenetwork": "זוהרים",
+        "devicename": "בלון גאיה",
+        "component": "תקשורת",
+        "description": "ריצודים",
+        "tid": "d368a0ec-5d25-4d66-a29c-b298840272c6",
+        "starttime": "29/04/2022 23:42:57",
+        "techcomment": "ריסטרט",
+        "timetillfixed": 24.231523990631104
     }
 ]

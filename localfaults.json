@@ -38,5 +38,14 @@
         "description": "אין פוקוס",
         "tid": "090af885-66eb-402c-9314-85cfc35a711b",
         "starttime": 1650752874.2859263
+    },
+    {
+        "devicetype": "קרנצ",
+        "devicelocation": "ק.ד 190",
+        "devicename": "קרנצ 190",
+        "component": "מצלמת יום",
+        "description": "לא רואים טוב",
+        "tid": "d314637a-ea89-4089-bfd5-0d45d8bed696",
+        "starttime": 1650967620.8553028
     }
 ]

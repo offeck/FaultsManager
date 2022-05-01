@@ -3,16 +3,65 @@
   "localjson": "D:\\Projects\\Python\\FaultsManager\\localfaults.json",
   "completedjson": "D:\\Projects\\Python\\FaultsManager\\localcompletedfaults.json",
   "localdevices": {
-    "בלון אטלס": {"devicetype":"בלון",
-    "devicelocation":"מוצב ארז"},
-    "בלון זאוס": {"devicetype":"בלון",
-      "devicelocation":"מוצב זאוס"},
-    "בלון גאיה": {"devicetype":"בלון",
-      "devicelocation":"מוצב פגה"},
-    "קרנצ 170": {"devicetype":"קרנצ",
-      "devicelocation":"ק.ד 170"},
-    "קרנצ 190": {"devicetype":"קרנצ",
-      "devicelocation":"ק.ד 190"}
+    "בלון אטלס": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב ארז",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון זאוס": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב נחל עוז",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בללון גאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גאייה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גיאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גגאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלןון גאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ 170": {
+      "devicetype": "קרנצ",
+      "devicelocation": "פסקל 170",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ 190": {
+      "devicetype": "קרנצ",
+      "devicelocation": "פסקל 190",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ פגה": {
+      "devicetype": "קרנצ",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "כללי":{
+        "devicetype":"כללי",
+        "devicelocation":"כללי"
+    }
   },
   "engtohebdict": {
     "description": "פירוט תקלה",
@@ -21,7 +70,8 @@
     "devicetype": "סוג אמצעי",
     "timetillfixed": "זמן",
     "starttime": "זמן התחלה",
-    "techcomment": "פיתרון תקלה"
+    "techcomment": "פיתרון תקלה",
+    "devicelocation": "מיקום אמצעי"
   },
   "devices": {
     "בלון": {
@@ -33,6 +83,9 @@
       "מצלמה תרמית": ["אי התכיילות", "מסך שחור", "פיקסלים על חצי מסך"],
       "מצלמת יום": ["לא רואים טוב", "אין פוקוס"],
       "מצלמת סוויר": ["אין פוקוס", "לא רואים טוב"]
+    },
+    "כללי": {
+      "מרס": ["נפילת חמל"]
     }
   }
 }
