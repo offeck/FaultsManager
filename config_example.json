@@ -17,6 +17,50 @@
       "devicetype": "בלון",
       "devicelocation": "מוצב פגה",
       "devicenetwork": "זוהרים"
+    },
+    "בללון גאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גאייה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גיאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלון גגאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "בלןון גאיה": {
+      "devicetype": "בלון",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ 170": {
+      "devicetype": "קרנצ",
+      "devicelocation": "פסקל 170",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ 190": {
+      "devicetype": "קרנצ",
+      "devicelocation": "פסקל 190",
+      "devicenetwork": "זוהרים"
+    },
+    "קרנצ פגה": {
+      "devicetype": "קרנצ",
+      "devicelocation": "מוצב פגה",
+      "devicenetwork": "זוהרים"
+    },
+    "מרס": {
+      "devicetype": "מרס",
+      "devicelocation": "חמל חיובי צפוני"
     }
   },
   "engtohebdict": {
@@ -26,16 +70,15 @@
     "devicetype": "סוג אמצעי",
     "timetillfixed": "זמן",
     "starttime": "זמן התחלה",
-    "techcomment": "הערת טכנאי",
-    "devicelocation": "מיקום אמצעי",
-    "techincharge":"גורם מטפל"
+    "techcomment": "פיתרון תקלה",
+    "devicelocation": "מיקום אמצעי"
   },
   "devices": {
     "בלון": {
-      "מצלמה תרמית": ["מסך שחור רק במצלמה תרמית", "פיקסלים על המסך", "אחר"],
+      "מצלמה תרמית": ["מסך שחור", "פיקסלים", "אחר"],
       "מצלמת יום": ["לא רואים טוב", "אין פוקוס", "אחר"],
-      "תקשורת": ["אין שליטה במרס ובמחשב טכנאי", "וידאו מרצד", "אחר"],
-      "חיבור למרס": ["אין שליטה במרס", "מסך שחור במרס", "אחר"]
+      "תקשורת": ["אין שליטה", "ריצודים", "אחר"],
+      "חשמל": ["אין חשמל"]
     },
     "קרנצ": {
       "מצלמה תרמית": ["אי התכיילות", "מסך שחור", "פיקסלים על חצי מסך"],

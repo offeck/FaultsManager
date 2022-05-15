@@ -325,5 +325,18 @@
         "starttime": "12/05/2022 20:58:46",
         "techcomment": "הסתדר לבד",
         "timetillfixed": 229.98755884170532
+    },
+    {
+        "devicetype": "בלון",
+        "devicelocation": "מוצב פגה",
+        "devicenetwork": "זוהרים",
+        "devicename": "בלון גאיה",
+        "component": "תקשורת",
+        "description": "אין שליטה במרס ובמחשב טכנאי",
+        "tid": "8fe6e5d9-369a-4245-9853-7180637c80a3",
+        "starttime": "16/05/2022 02:42:51",
+        "techcomment": "נפתר לבד",
+        "techincharge": "חטפ אמיתי",
+        "timetillfixed": 21.261255979537964
     }
 ]

@@ -120,7 +120,7 @@ class closefaultframe(myframe):
             self.entries[-1][1].insert(0, field[1])
             if field[1] == "אחר":
                 self.entries[-1][1].configure(fg='red')
-            self.entries[-1][1].grid(row=c+1, column=0, pady=(0, 7))
+            self.entries[-1][1].grid(row=c+1, column=0, sticky='we', pady=(0, 7),padx=(0,7))
         self.closebutton = mybutton('#222831', self, text='סגור תקלה', fg="#00ADB5", bg="#393E46", **regfont,
                                     command=self.onbuttonclose)
         self.closebutton.grid(columnspan=2, pady=(0, 7))
@@ -139,6 +139,8 @@ class openfaultobject(dict):
         super().__init__(**data.copy())
         if 'techcomment' not in self:  # temporary solution
             self.update({'techcomment': ''})  # temporary solution
+        if 'techincharge' not in self:  # temporary solution
+            self.update({'techincharge': ''})  # temporary solution
         # self.open = True
 
     def getuptime(self):
@@ -322,9 +324,8 @@ if __name__ == '__main__':
     with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), configName), encoding='utf-8') as f:
         config = json.load(f)
     localjsonpath = config['localjson']
-    openstages = ['devicetype',
-                  'devicename', 'component', 'description']
-    closestages = openstages[1:]+['techcomment']
+    openstages = ['devicename', 'component', 'description']
+    closestages = openstages[1:]+['techincharge', 'techcomment']
     completedjsonpath = config['completedjson']
     engtohebdict = config['engtohebdict']
     root = tk.Tk()

@@ -48,5 +48,15 @@
         "description": "לא רואים טוב",
         "tid": "707770af-d294-4100-b03b-d8617f8995bf",
         "starttime": 1652269334.8040168
+    },
+    {
+        "devicetype": "בלון",
+        "devicelocation": "מוצב פגה",
+        "devicenetwork": "זוהרים",
+        "devicename": "בלון גאיה",
+        "component": "מצלמה תרמית",
+        "description": "מסך שחור רק במצלמה תרמית",
+        "tid": "454e5610-ffa7-462e-8bae-1b243a66830c",
+        "starttime": 1652657703.1859238
     }
 ]
