@@ -40,12 +40,13 @@
         "starttime": 1650752874.2859263
     },
     {
-        "devicetype": "קרנצ",
-        "devicelocation": "ק.ד 190",
-        "devicename": "קרנצ 190",
+        "devicetype": "בלון",
+        "devicelocation": "מוצב נחל עוז",
+        "devicenetwork": "זוהרים",
+        "devicename": "בלון זאוס",
         "component": "מצלמת יום",
         "description": "לא רואים טוב",
-        "tid": "d314637a-ea89-4089-bfd5-0d45d8bed696",
-        "starttime": 1650967620.8553028
+        "tid": "707770af-d294-4100-b03b-d8617f8995bf",
+        "starttime": 1652269334.8040168
     }
 ]

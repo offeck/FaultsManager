@@ -4,6 +4,7 @@ import time
 import uuid
 from functools import partial
 import datetime
+import os
 
 
 def get_keys_from_value(d, val):
@@ -129,14 +130,13 @@ class closefaultframe(myframe):
         self.openfault.closeandsubmit({i[0]: i[1].get() for i in self.entries})
         self.pack_forget()
         self.openfaults.remove(self.openfault)
-        openingframe(root, self.openfaults).pack(fill=tk.BOTH, expand=True)
+        openingframe(root, self.openfaults).pack()
 
 
 class openfaultobject(dict):
-    data: dict
 
-    def __init__(self, data):
-        super().__init__(data)
+    def __init__(self, data: dict):
+        super().__init__(**data.copy())
         if 'techcomment' not in self:  # temporary solution
             self.update({'techcomment': ''})  # temporary solution
         # self.open = True
@@ -318,10 +318,11 @@ class openfaultframe(myframe):  # stages need changes
 
 
 if __name__ == '__main__':
-    with open('D:\Projects\Python\FaultsManager\config.json', encoding='utf-8') as f:
+    configName = 'config.json'
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), configName), encoding='utf-8') as f:
         config = json.load(f)
     localjsonpath = config['localjson']
-    openstages = ['devicetype','devicelocation',
+    openstages = ['devicetype',
                   'devicename', 'component', 'description']
     closestages = openstages[1:]+['techcomment']
     completedjsonpath = config['completedjson']

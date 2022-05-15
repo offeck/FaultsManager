@@ -290,5 +290,40 @@
         "starttime": "29/04/2022 23:42:57",
         "techcomment": "ריסטרט",
         "timetillfixed": 24.231523990631104
+    },
+    {
+        "devicetype": "בלון",
+        "devicelocation": "מוצב נחל עוז",
+        "devicenetwork": "זוהרים",
+        "devicename": "בלון זאוס",
+        "component": "מצלמת יום",
+        "description": "אין זום",
+        "tid": "f6c00d21-d6e3-423b-9c6f-585125754eb2",
+        "starttime": "09/05/2022 14:48:39",
+        "techcomment": "ריסטרט למחשב בלון",
+        "timetillfixed": 33.03322744369507
+    },
+    {
+        "devicetype": "קרנצ",
+        "devicelocation": "פסקל 170",
+        "devicenetwork": "זוהרים",
+        "devicename": "קרנצ 170",
+        "component": "מצלמת סוויר",
+        "description": "לא רואים טוב",
+        "tid": "d8eb7e34-9c81-4909-844c-132f43d317e1",
+        "starttime": "09/05/2022 14:56:32",
+        "techcomment": "ריסטרט",
+        "timetillfixed": 18.7009060382843
+    },
+    {
+        "devicetype": "מרס",
+        "devicelocation": "חמל חיובי צפוני",
+        "devicename": "מרס",
+        "component": "עמדת מפקדת",
+        "description": "שחזורים לא עובדים",
+        "tid": "8536f92a-e5eb-4d83-89fb-0d350625256f",
+        "starttime": "12/05/2022 20:58:46",
+        "techcomment": "הסתדר לבד",
+        "timetillfixed": 229.98755884170532
     }
 ]
